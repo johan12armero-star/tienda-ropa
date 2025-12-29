@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUSEB 12 | Ropa Unisex</title>
+  <style>
+    :root{
+      --rosa-base:#FFD6EB;
+      --rosa-acento:#FF4FD8;
+      --negro:#000000;
+      --blanco:#FFFFFF;
+      --gris:#F3F3F3;
+    }
+
+    body{
+      font-family:'Segoe UI',Arial,sans-serif;
+      margin:0;
+      background:var(--rosa-base);
+      color:#111
+    }
+
+    header{text-align:center;padding:80px 20px 60px}
+    header img{max-width:180px}
+    header h1{margin:25px 0 10px;font-size:42px;letter-spacing:2px}
+    header p{font-size:18px;opacity:.8}
+
+    nav{background:#000;padding:14px;text-align:center;position:sticky;top:0;z-index:100}
+    nav a{color:#fff;margin:0 14px;text-decoration:none;font-weight:bold}
+    .cart-btn{background:var(--rosa-acento);padding:8px 16px;border-radius:30px}
+
+    .container{max-width:1200px;margin:auto;padding:60px 20px}
+    h2{text-align:center;margin-bottom:40px}
+    .pagos-text{text-align:center;font-size:18px;margin-top:10px}
+
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;justify-items:center}
+    .product{background:#fff;padding:22px;border-radius:22px;box-shadow:0 12px 30px rgba(0,0,0,.12);text-align:center}
+    /* eliminado: ocultaba las imágenes */
+
+.slider{position:relative;width:100%;overflow:hidden;border-radius:16px}
+.slider-track{display:flex;transition:transform .4s ease}
+.slider{margin-bottom:10px}
+.slider img{width:100%;flex-shrink:0}
+.slider button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer}
+.slider .prev{left:8px}
+.slider .next{right:8px}
+    .price{font-size:18px;font-weight:bold;margin:12px 0}
+
+    select,input,button{width:100%;padding:12px;margin-top:10px;border-radius:12px;border:1px solid #ccc}
+    .add-cart{background:var(--rosa-acento);color:#fff;border:none;font-weight:bold;cursor:pointer}
+
+    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:200}
+    .modal-content{position:absolute;top:0;right:0;height:100%;width:420px;background:#fff;padding:30px;overflow-y:auto;box-shadow:-8px 0 30px rgba(0,0,0,.25);animation:slideIn .3s ease}
+    @keyframes slideIn{from{right:-450px}to{right:0}}
+    .close{float:right;font-size:28px;cursor:pointer}
+
+    .cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+    .qty-controls button{margin:0 4px}
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="imagenes/logo.png" alt="LUSEB 12" onerror="this.style.display='none';console.error('Logo no encontrado')">
+  <h1>LUSEB 12</h1>
+  <p>Ropa unisex</p>
+</header>
+
+<nav>
+  <a href="#hombre">Hombre</a>
+  <a href="#mujer">Mujer</a>
+  <a href="#pagos">Pagos</a>
+  <a href="login.html" style="color:#FF4FD8;font-weight:bold">Admin</a>
+  <a href="javascript:void(0)" onclick="toggleCart()" class="cart-btn">🛒 Carrito (<span id="count">0</span>)</a>
+</nav>
+
+<div class="container" id="hombre">
+  <h2>Hombre</h2>
+
+  <h3 style="margin-top:40px">Jeans</h3>
+  <div class="products">
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-1-frente.png"><img src="imagenes/hombre/jean-hombre-1-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Clásico</h3>
+      <div class="price">$125.000</div>
+      <select id="th1"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh1" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Clásico',125000,th1.value,qh1.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-2-frente.png"><img src="imagenes/hombre/jean-hombre-2-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Oscuro</h3>
+      <div class="price">$128.000</div>
+      <select id="th2"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh2" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Oscuro',128000,th2.value,qh2.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-3-frente.png"><img src="imagenes/hombre/jean-hombre-3-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Slim</h3>
+      <div class="price">$130.000</div>
+      <select id="th3"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh3" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Slim',130000,th3.value,qh3.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-4-frente.png"><img src="imagenes/hombre/jean-hombre-4-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Recto</h3>
+      <div class="price">$127.000</div>
+      <select id="th4"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh4" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Recto',127000,th4.value,qh4.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-5-frente.png"><img src="imagenes/hombre/jean-hombre-5-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Claro</h3>
+      <div class="price">$124.000</div>
+      <select id="th5"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh5" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Claro',124000,th5.value,qh5.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-6-frente.png"><img src="imagenes/hombre/jean-hombre-6-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Premium</h3>
+      <div class="price">$135.000</div>
+      <select id="th6"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh6" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Premium',135000,th6.value,qh6.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/hombre/jean-hombre-7-frente.png"><img src="imagenes/hombre/jean-hombre-7-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Hombre Urbano</h3>
+      <div class="price">$132.000</div>
+      <select id="th7"><option value="">Selecciona talla</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>
+      <input type="number" id="qh7" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Hombre Urbano',132000,th7.value,qh7.value)">Agregar</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="container" id="mujer">
+  <h2>Mujer</h2>
+
+  <h3 style="margin-top:40px">Jeans</h3>
+  <div class="products">
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/mujer/jean-mujer-1-frente.png"><img src="imagenes/mujer/jean-mujer-1-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Mujer Azul Claro</h3>
+      <div class="price">$110.000</div>
+      <select id="tm1"><option value="">Selecciona talla</option><option>6</option><option>8</option><option>10</option><option>12</option></select>
+      <input type="number" id="qm1" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Mujer Azul Claro',110000,tm1.value,qm1.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/mujer/jean-mujer-2-frente.png"><img src="imagenes/mujer/jean-mujer-2-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Mujer Negro</h3>
+      <div class="price">$115.000</div>
+      <select id="tm2"><option value="">Selecciona talla</option><option>6</option><option>8</option><option>10</option><option>12</option></select>
+      <input type="number" id="qm2" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Mujer Negro',115000,tm2.value,qm2.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/mujer/jean-mujer-3-frente.png"><img src="imagenes/mujer/jean-mujer-3-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Mujer Skinny</h3>
+      <div class="price">$120.000</div>
+      <select id="tm3"><option value="">Selecciona talla</option><option>6</option><option>8</option><option>10</option><option>12</option></select>
+      <input type="number" id="qm3" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Mujer Skinny',120000,tm3.value,qm3.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/mujer/jean-mujer-4-frente.png"><img src="imagenes/mujer/jean-mujer-4-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Mujer Recto</h3>
+      <div class="price">$118.000</div>
+      <select id="tm4"><option value="">Selecciona talla</option><option>6</option><option>8</option><option>10</option><option>12</option></select>
+      <input type="number" id="qm4" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Mujer Recto',118000,tm4.value,qm4.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0"><div class="slider-track"><img src="imagenes/mujer/jean-mujer-5-frente.png"><img src="imagenes/mujer/jean-mujer-5-atras.png"></div><button class="prev" onclick="slide(this,-1)">‹</button><button class="next" onclick="slide(this,1)">›</button></div>
+      <h3>Jean Mujer Clásico</h3>
+      <div class="price">$112.000</div>
+      <select id="tm5"><option value="">Selecciona talla</option><option>6</option><option>8</option><option>10</option><option>12</option></select>
+      <input type="number" id="qm5" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Jean Mujer Clásico',112000,tm5.value,qm5.value)">Agregar</button>
+    </div>
+
+  </div>
+
+  <h3 style="margin-top:60px">Blusas</h3>
+  <div class="products">
+
+    <div class="product">
+      <div class="slider" data-index="0">
+        <div class="slider-track">
+          <img src="imagenes/mujer/blusa-1-frente.png">
+          <img src="imagenes/mujer/blusa-1-detalle.png">
+        </div>
+        <button class="prev" onclick="slide(this,-1)">‹</button>
+        <button class="next" onclick="slide(this,1)">›</button>
+      </div>
+      <h3>Blusa Mujer Básica</h3>
+      <div class="price">$75.000</div>
+      <select id="tb1"><option value="">Selecciona talla</option><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+      <input type="number" id="qb1" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Blusa Mujer Básica',75000,tb1.value,qb1.value)">Agregar</button>
+    </div>
+
+    <div class="product">
+      <div class="slider" data-index="0">
+        <div class="slider-track">
+          <img src="imagenes/mujer/blusa-2-frente.png">
+          <img src="imagenes/mujer/blusa-2-detalle.png">
+        </div>
+        <button class="prev" onclick="slide(this,-1)">‹</button>
+        <button class="next" onclick="slide(this,1)">›</button>
+      </div>
+      <h3>Blusa Mujer Elegante</h3>
+      <div class="price">$85.000</div>
+      <select id="tb2"><option value="">Selecciona talla</option><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+      <input type="number" id="qb2" min="1" value="1">
+      <button class="add-cart" onclick="addCart('Blusa Mujer Elegante',85000,tb2.value,qb2.value)">Agregar</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="container" id="pagos">
+  <h2>Métodos de Pago</h2>
+  <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:20px">
+    <div><img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Nequi_logo.svg" alt="Nequi" style="height:40px"></div>
+    <div><img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Daviplata_logo.svg" alt="Daviplata" style="height:40px"></div>
+    <div><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/MercadoPago.svg" alt="Mercado Pago" style="height:40px"></div>
+  </div>
+</div>
+
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="toggleCart()">&times;</span>
+    <h3>🛒 Carrito</h3>
+    <div id="cartItems"></div>
+
+    <h4>📦 Datos de Envío</h4>
+    <input id="name" placeholder="Nombre completo">
+    <input id="address" placeholder="Dirección">
+    <input id="city" placeholder="Ciudad">
+    <input id="phone" placeholder="Teléfono">
+
+    <button class="add-cart" onclick="checkout()">📲 Hacer el pedido por WhatsApp</button>
+  </div>
+</div>
+
+<script>
+// AUTO SLIDER
+document.addEventListener('DOMContentLoaded',()=>{
+setInterval(()=>{
+  document.querySelectorAll('.slider').forEach(sl=>{
+    const track=sl.querySelector('.slider-track');
+    if(!track) return;
+    let i=Number(sl.dataset.index)||0;
+    const t=track.children.length;
+    i=(i+1)%t;
+    sl.dataset.index=i;
+    track.style.transform=`translateX(-${i*100}%)`;
+  })
+},4000);
+});
+
+function slide(btn,dir){
+  const slider=btn.closest('.slider');
+  let index=Number(slider.dataset.index)||0;
+  const track=slider.querySelector('.slider-track');
+  const total=track.children.length;
+  index=(index+dir+total)%total;
+  slider.dataset.index=index;
+  track.style.transform=`translateX(-${index*100}%)`;
+}
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addCart(name,price,size,qty){
+  if(!size){alert('Selecciona talla');return}
+  qty=Number(qty)||1
+  const e=cart.find(p=>p.name===name&&p.size===size)
+  e?e.qty+=qty:cart.push({name,price,size,qty})
+  saveCart();toggleCart();
+}
+
+function saveCart(){localStorage.setItem('cart',JSON.stringify(cart));renderCart()}
+
+function renderCart(){
+  const c=document.getElementById('cartItems');
+  if(!c) return;
+  let h='',n=0;
+  cart.forEach((p,i)=>{n+=p.qty;h+=`<div class="cart-item"><div><b>${p.name}</b><br>Talla ${p.size}</div><div class="qty-controls"><button onclick="changeQty(${i},-1)">−</button>${p.qty}<button onclick="changeQty(${i},1)">+</button><button onclick="removeItem(${i})">✕</button></div></div>`})
+  c.innerHTML=h||'<p>Carrito vacío</p>';
+  document.getElementById('count').innerText=n;
+}
+
+function changeQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);saveCart()}
+function removeItem(i){cart.splice(i,1);saveCart()}
+function toggleCart(){cartModal.style.display=cartModal.style.display==='block'?'none':'block'}
+
+function checkout(){
+  if(!cart.length){alert('Carrito vacío');return}
+  const n=document.getElementById('name').value.trim();
+  const a=document.getElementById('address').value.trim();
+  const c=document.getElementById('city').value.trim();
+  const p=document.getElementById('phone').value.trim();
+  if(!n||!a||!c||!p){alert('Completa los datos');return}
+
+  let m=`Hola, quiero hacer este pedido:
+
+👤 ${n}
+📞 ${p}
+📍 ${a}, ${c}
+
+🛒 Pedido:
+`;
+  cart.forEach(x=>m+=`- ${x.name} | Talla ${x.size} | x${x.qty}
+`);
+
+  const url=`https://wa.me/573123647767?text=${encodeURIComponent(m)}`;
+  window.open(url,'_blank');
+}
+
+renderCart();
+</script>
+</body>
+</html>
